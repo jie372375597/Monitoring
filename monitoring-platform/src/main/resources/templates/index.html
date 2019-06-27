@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible"content="IE=9; IE=8; IE=7; IE=EDGE" />
+        <title>内容列表页面</title>
+        <script src="/lib/jquery.min.js"></script>
+    </head>
+    <body style="background: #e1e9eb;">
+        <form action="" id="mainForm" method="post">
+            <div >
+                <div >
+                    <table >
+                        <tbody>
+                            <tr>
+                                <td width="90" align="right">db_config：</td>
+                                <td>
+                                    <input type="text" value=""/>
+                                </td>
+                                <td width="85" align="right"><input type="submit" class="tabSub" value="查询" /></td>
+                                <td width="85" align="right"><input type="button" class="tabSub"  onclick="refurbishIndex()" value="新增" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div >
+                        <table width="100%">
+                            <tr>
+                                <th><input type="checkbox" id="all" onclick="#"/></th>
+                                <th>id</th>
+                                <th>指令</th>
+                                <th>描述</th>
+                                <th>操作</th>
+                            </tr>
+
+                            <tbody width="100%" id="tbodydata1">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form action="" id="secondForm" method="post">
+            <div >
+                <div >
+                    <table >
+                        <tbody>
+                            <tr>
+                                <td width="90" align="right">monitoring_config：</td>
+                                <td>
+                                    <input type="text" value=""/>
+                                </td>
+                                <td width="85" align="right"><input type="submit" class="tabSub" value="查询" /></td>
+                                <td width="85" align="right"><input type="button" class="tabSub"  onclick="refurbishIndex()" value="新增" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div >
+                        <table width="100%">
+                            <tr>
+                                <th><input type="checkbox" id="all" onclick="#"/></th>
+                                <th>id</th>
+                                <th>指令</th>
+                                <th>描述</th>
+                                <th>操作</th>
+                            </tr>
+
+                            <tbody width="100%" id="tbodydata2">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        refurbishIndex1();
+        refurbishIndex2();
+    })
+
+    function refurbishIndex1(){
+        $.ajax({
+            type:"post",
+            url:"/monitoring/list",
+            data:{},
+            async: false,
+            success:function (data) {
+                var str="";
+                for (i in data) {
+                    str += "<tr>" +
+                        "<td align='center'>"+"<input type=\"checkbox\" />"+"</td>"+
+                        "<td align='center'>" + data[i].id + "</td>" +
+                        "<td align='center'>" + data[i].command + "</td>" +
+                        "<td align='center'>" + data[i].description + "</td>" +
+                            "<td align='center'>\n" +
+                        "<a href=\"#\">修改</a>\n" +
+                        "<a href=\"#\">删除</a>\n" +
+                        "</td>"
+                        "</tr>";
+                }
+
+                document.getElementById("tbodydata1").innerHTML=str;
+
+            }
+        });
+    }
+    function refurbishIndex2(){
+        $.ajax({
+            type:"post",
+            url:"/monitoring/list",
+            data:{},
+            async: false,
+            success:function (data) {
+                var str="";
+                for (i in data) {
+                    str += "<tr>" +
+                        "<td align='center'>"+"<input type=\"checkbox\" />"+"</td>"+
+                        "<td align='center'>" + data[i].id + "</td>" +
+                        "<td align='center'>" + data[i].command + "</td>" +
+                        "<td align='center'>" + data[i].description + "</td>" +
+                            "<td align='center'>\n" +
+                        "<a href=\"#\">修改</a>\n" +
+                        "<a href=\"#\">删除</a>\n" +
+                        "</td>"
+                        "</tr>";
+                }
+
+                document.getElementById("tbodydata2").innerHTML=str;
+
+            }
+        });
+    }
+</script>
